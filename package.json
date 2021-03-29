@@ -1,0 +1,29 @@
+{
+  "name": "Youtube-Assignment",
+  "version": "1.0.0",
+  "license": "",
+  "author": "Gourav",
+  "dependencies": {
+    "node-sass": "^4.14.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.1"
+  },
+  "scripts": {
+    "start": "SET PORT=8004&react-scripts start",
+    "build": "react-scripts build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
