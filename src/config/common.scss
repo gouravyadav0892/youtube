@@ -1,0 +1,146 @@
+body {
+    user-select: none;
+}
+
+.btn.btn-primary {
+    max-width: 100%;
+    min-width: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: max-content;
+    &, &:hover, &:active, &:focus {
+        color: #fff !important;
+        background-color:#006db0 !important;
+        border-color:#d3d8de !important;
+    }
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+
+.dark-theme {
+    background-color: #000;
+    color: #eee;
+    min-height: 100vh;
+}
+
+.dark-theme-btn {
+    float: right;
+    font-size: 90%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-container {
+    margin:30px 0;    
+
+    .form-control-feedback {
+        pointer-events: initial;
+    }
+        
+}
+
+.youtubeVideoPlayer {
+    padding: 15px 0;
+    .youtube_iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 480px;
+        border: none;
+    }
+    .title {
+        font-size: 180%;
+
+    }
+    .description {
+        font-size: 90%;
+    }
+    .date {
+        display: none;
+    }
+}
+
+.video-section {
+    .video-list {
+        // max-height: 640px;
+        // overflow: auto;
+    }
+    .video-thumbnail-size-list {
+        text-align: center;
+        margin-bottom: 10px;
+        .thumb-size {
+            cursor: pointer;
+            padding: 10px;
+            vertical-align: middle;
+            &.selected {
+                color:chocolate;
+                // padding: 0;
+                // zoom: 2;
+            }
+        }
+    }
+}
+
+.video-thumbnail {
+    margin: 5px 0;
+    img {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+}
+
+.comments-section {
+    border-top: 2px solid #aaa;
+    padding-top: 20px;
+}
+
+.comment-box {
+    margin: 10px;
+    
+    .author {
+        font-weight: 600;
+    }
+    .comment {
+        font-size: 90%;
+        margin: 0;
+    }
+    .likes, .dislikes {
+        margin-right: 30px;
+        cursor: pointer;
+        &.selected {
+            font-weight: 600;   
+        }
+    }
+}
+
+
+
+/* Scroll bar css */
+/* width */
+    * {
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+            background-color: #F5F5F5;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #8992a2;
+        }
+    }
+    .tooltip {
+        pointer-events: none;
+    }
