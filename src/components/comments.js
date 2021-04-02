@@ -5,57 +5,56 @@ export default class CommentSection extends Component {
     constructor() {
         super()
         this.state = {
+            video_id: null,
             comments: []
         }
     }
 
     componentDidMount = () => {
-        // set initial comments from local storage
-        var comments  = localStorage.getItem("comments")
-        if(comments) {
-            this.setState({
-                comments: JSON.parse(comments)
-            })
-        } else {
-            // for the first time set comments 
-            console.log("Comments ADDED")
-            this.setState({
-                comments: [
-                    {
-                        author: "Joffrey Baratheon",
-                        isLiked: 1,
-                        likes: 12,
-                        dislikes: 34,
-                        comment: "Out of all the Geralt fan mixes ive reviewed, this video is by far the best. Your respect for the story is fully shown, thank you for using the witcher theme as well surprisingly its hard to find one that does"
-                    },
-                    {
-                        author: "Marie Joseph",
-                        isLiked: 0,
-                        likes: 12,
-                        dislikes: 34,
-                        comment: "But you know, Dani can finish the Lannisters in a snap. Like, Cersei is unarmed that moment, no Scorpion to  kill the dragons, one dragon can unman the wall with its fire so the Unsullied and Dothraki can finish the rest of the army unblemished. Cersei has 0% chance of winning in that moment. But then, most will find it boring if that really happens. (But me, I will enjoy it. LOL)."
-                    },
-                    {
-                        author: "Ann Birgets",
-                        isLiked: -1,
-                        likes: 12,
-                        dislikes: 34,
-                        comment: "I can't wait for the next season to start - bring on more witcher - loved the books, sucked a bit at playing the games but enjoyed it - watched the original vids,  and season 1 of the series - waiting for more, hopefully not too long or the actors will age too much - tks for this refresher"
-                    }
-                ]
-            })
-
-        }
+        console.log("Did Mount")
         window.addEventListener("beforeunload", this._saveComments)
     }
 
-    _saveComments = () => {
-        localStorage.setItem("comments", JSON.stringify(this.state.comments))
+    static getDerivedStateFromProps = (nextProps, prevState) => {
+        if(nextProps.videoId !== prevState.video_id) {
+            var comments = localStorage.getItem("comments_" + nextProps.videoId) || '[]'
+            return {
+                video_id: nextProps.videoId,
+                comments: JSON.parse(comments)
+            }
+        }
+        return null
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        // debugger
+        if(prevProps.videoId !== this.props.videoId) {
+            this._saveComments(prevState.video_id, prevState.comments)
+            var comments = localStorage.getItem("comments_" + this.props.videoId)
+            if(comments) {
+                this.setState({
+                    comments: JSON.parse(comments),
+                    video_id: this.props.videoId
+                })
+            } else {
+                this.setState({
+                    comments: [],
+                    video_id: this.props.videoId
+                })
+            }
+        }
+    }
+
+    _saveComments = (video_id, comments) => {
+        if(comments.length) {
+            localStorage.setItem("comments_" + video_id, JSON.stringify(comments))
+        }
     }
     
 
     componentWillUnmount = () => {
-        this._saveComments()
+        debugger
+        this._saveComments(this.state.video_id, this.state.comments)
         window.removeEventListener("beforeunload", this._saveComments)
     }
 
@@ -100,7 +99,6 @@ export default class CommentSection extends Component {
 
 
     render() {
-
         var comments = this.state.comments.map((item, index) => {
             return <Comment key={"comments_" + index} data={item} 
                 like={this._like.bind(this, index)} dislike={this._dislike.bind(this, index)} 

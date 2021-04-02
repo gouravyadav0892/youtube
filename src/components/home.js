@@ -63,7 +63,7 @@ export default class Home extends Component {
         mainContent = <>
           <div className="col-sm-12 col-md-8" >
             <VideoPlayer data={this.state.videos[this.state.selectedVideo]} />
-            <CommentSection />
+            <CommentSection videoId={this.state.videos[this.state.selectedVideo].id}/>
           </div>
           <div className="col-sm-12 col-md-4">
             <VideoListSection data={this.state.videos} changeVideo={this._changeVideoSelection}/>
